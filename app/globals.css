@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --light-grey: #c2c2d6;
+  --flieder: #666999;
 }
 
 @theme inline {
