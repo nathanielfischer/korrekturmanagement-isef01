@@ -7,7 +7,7 @@ export default function LogoutButton() {
             <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
 
                 <div className="flex w-full justify-center p-3">
-                    <form
+                    <form 
                         action={async () => {
                             'use server';
                             await signOut({ redirectTo: '/' });
