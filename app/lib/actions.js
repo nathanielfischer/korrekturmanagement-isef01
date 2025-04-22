@@ -5,6 +5,8 @@ import { AuthError } from 'next-auth';
 import { getUserIdByEmail } from "@/app/lib/database";
 import { sql } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
+import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
 
 export async function authenticate(prevState, formData) {
@@ -30,6 +32,8 @@ export async function createNewUser(prevState, formData) {
         password: formData.get('password'),
     };
 
+    console.log(name);
+
     try {
         // await signIn('credentials', formData);
         const userId = await getUserIdByEmail(email);
@@ -37,7 +41,6 @@ export async function createNewUser(prevState, formData) {
         if (!userId) {
             // if no existing user with this email
             const hashedPassword = await bcrypt.hash(password, 10);
-            console.log(hashedPassword);
 
 
             await sql`
@@ -50,11 +53,13 @@ export async function createNewUser(prevState, formData) {
         }
 
     } catch (error) {
-        switch (error.type) {
-            case 'CredentialsSignin':
-                return 'Invalid credentials.';
-            default:
-                return 'Something went wrong.';
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case 'CredentialsSignin':
+                    return 'Invalid credentials.';
+                default:
+                    return 'Something went wrong.';
+            }
         }
         throw error;
     }

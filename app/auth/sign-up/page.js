@@ -1,6 +1,6 @@
 import IuLogo from "@/app/ui/iu-logo.js";
 import SignUpForm from '@/app/ui/sign-up-form';
-
+import { Suspense } from 'react';
 
 export default function SignUpPage() {
     return (
@@ -13,7 +13,10 @@ export default function SignUpPage() {
                     </div>
                 </div>
 
-                <SignUpForm />
+
+                <Suspense>
+                    <SignUpForm />
+                </Suspense>
             </div>
         </main>
     );

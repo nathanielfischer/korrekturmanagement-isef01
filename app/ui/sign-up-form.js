@@ -13,7 +13,7 @@ import { createNewUser } from "@/app/lib/actions";
 import Link from 'next/link';
 
 export default function SignUpForm() {
-  const [errorMessage, formAction, isPending] = useActionState(createNewUser,undefined);
+  const [errorMessage, formAction, isPending] = useActionState(createNewUser, undefined);
 
   return (
     <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
