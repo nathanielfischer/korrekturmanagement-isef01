@@ -1,6 +1,6 @@
 'use server';
 
-import { signIn, auth } from '@/app/auth';
+import { signIn, auth } from '@/auth';
 import { AuthError } from 'next-auth';
 import { getUserIdByEmail } from "@/app/lib/database";
 import { sql } from '@vercel/postgres';
@@ -11,14 +11,14 @@ export async function authenticate(prevState, formData) {
     try {
         await signIn('credentials', formData);
     } catch (error) {
-        if (error instanceof AuthError) {
-            switch (error.type) {
-                case 'CredentialsSignin':
-                    return 'Falsche Anmeldedaten.';
-                default:
-                    return 'Etwas ist schiefgelaufen.';
-            }
+
+        switch (error.type) {
+            case 'CredentialsSignin':
+                return 'Falsche Anmeldedaten.';
+            default:
+                return 'Etwas ist schiefgelaufen.';
         }
+
         throw error;
     }
 }
@@ -37,6 +37,8 @@ export async function createNewUser(prevState, formData) {
         if (!userId) {
             // if no existing user with this email
             const hashedPassword = await bcrypt.hash(password, 10);
+            console.log(hashedPassword);
+
 
             await sql`
                 INSERT INTO users (name, email, password)

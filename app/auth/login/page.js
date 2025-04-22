@@ -1,5 +1,6 @@
 import IuLogo from "@/app/ui/iu-logo.js";
 import LoginForm from "@/app/ui/login-form";
+import { Suspense } from 'react';
 
 export default function LoginPage() {
     return (
@@ -12,7 +13,9 @@ export default function LoginPage() {
                     </div>
                 </div>
 
-                <LoginForm />
+                <Suspense>
+                    <LoginForm />
+                </Suspense>
             </div>
         </main>
     );

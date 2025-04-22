@@ -7,7 +7,7 @@ import { authConfig } from './auth.config';
 
 async function getUser(email) {
   try {
-    const user = await sql`SELECT * FROM haushalts_users WHERE email=${email}`;
+    const user = await sql`SELECT * FROM users WHERE email=${email}`;
     return user.rows[0];
   } catch (error) {
     console.error('Failed to fetch user:', error);

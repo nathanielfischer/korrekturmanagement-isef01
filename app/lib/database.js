@@ -7,10 +7,9 @@ export async function getUserIdByEmail(email) {
     noStore();
     try {
         const data = await sql`
-            SELECT user_id FROM haushalts_users
+            SELECT user_id FROM users
             WHERE email = ${email}
         `;
-
         return data.rows[0];
     } catch (error) {
         console.error('Database Error:', error);
