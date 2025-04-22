@@ -68,6 +68,40 @@ export async function createNewUser(prevState, formData) {
     redirect('/auth/login');
 }
 
+export async function createDataPoint(prevState, formData) {
+    // gets the ID of the current user
+    const user_id = await getLoggedInUsersId();
+
+    const status = "Offen";
+
+    // Prepare data for insertion into the database
+    const { typ, fach, modul, quelle, beschreibung } = {
+        typ: formData.get("typ"),
+        fach: formData.get("fach"),
+        modul: formData.get('modul'),
+        quelle: formData.get('quelle'),
+        beschreibung: formData.get('beschreibung')
+    };
+
+    // date = new Date(date).toISOString().split('T')[0];
+
+    // Insert data into the database
+    try {
+        await sql`
+            INSERT INTO daten (fach, modul, quelle, beschreibung, autor, status, typ)
+            VALUES (${fach}, ${modul}, ${quelle}, ${beschreibung}, ${user_id}, ${status}, ${typ})
+        `;
+    } catch (error) {
+        // If a database error occurs, return a more specific error.
+        return {
+            message: 'Fehler in der Datenbank: Daten nicht gespeichert.',
+        };
+    }
+
+    // Revalidate the cache and redirect the user.
+    revalidatePath('/dashboard');
+    redirect('/dashboard');
+}
 
 
 
