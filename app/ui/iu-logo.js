@@ -3,8 +3,9 @@ import Image from "next/image";
 export default function IuLogo() {
   return (
     <div
-      className={'flex flex-row items-center'}
+      className={'flex flex-wrap items-center justify-center text-center'}
     >
+      <p className={"basis-full text-red-600 text-xs"}>Studenten Demo</p>
       <Image
           src="/1920_iu-logo-d-black-rgb-horizontal.png"
           alt="IU logo"
