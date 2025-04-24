@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
       {/* <header className="flex justify-center mt-3 text-red-600">
         <p>Keine offizielle IU App!</p>
       </header> */}
-      <body>
+      <body className="m-1 sm:m-5 lg:m-10 lg:mt-5">
         <main>{children}</main>
       </body>
     </html>

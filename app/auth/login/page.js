@@ -9,6 +9,7 @@ export default function LoginPage() {
 
                 <div className="flex w-full justify-center p-3">
                     <div className="w-32 text-white md:w-36">
+                        <p className={"basis-full text-red-600 text-xs text-center"}>Studenten Demo</p>
                         <IuLogo />
                     </div>
                 </div>

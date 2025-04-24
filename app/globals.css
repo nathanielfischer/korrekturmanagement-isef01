@@ -13,6 +13,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-black-hover: rgba(15, 32, 127, 0.035);
+  --color-light-grey: #F3F3F7;
 }
 
 body {
