@@ -2,7 +2,7 @@
 
 import { signIn, auth } from '@/auth';
 import { AuthError } from 'next-auth';
-import { getUserIdByEmail } from "@/app/lib/database";
+import { getUserIdByEmail, getVerantwortlichenByModul } from "@/app/lib/database";
 import { sql } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
 import { redirect } from 'next/navigation'
@@ -68,14 +68,20 @@ export async function createNewUser(prevState, formData) {
     redirect('/auth/login');
 }
 
-export async function createDataPoint(prevState, formData) {
+
+//TODO: Funktion testen
+// Datum und meldung_id werden automatisch von Postgres vergeben!
+export async function createMeldung(prevState, formData) {
     // gets the ID of the current user
     const user_id = await getLoggedInUsersId();
+    // gets the Verantwortlichen for the selected Modul
+    const verantwortlicher = getVerantwortlichenByModul(formData.get('modul'));
 
     const status = "Offen";
 
     // Prepare data for insertion into the database
-    const { typ, fach, modul, quelle, beschreibung } = {
+    const { titel, typ, fach, modul, quelle, beschreibung } = {
+        titel: formData.get("titel"),
         typ: formData.get("typ"),
         fach: formData.get("fach"),
         modul: formData.get('modul'),
@@ -83,18 +89,16 @@ export async function createDataPoint(prevState, formData) {
         beschreibung: formData.get('beschreibung')
     };
 
-    // date = new Date(date).toISOString().split('T')[0];
-
     // Insert data into the database
     try {
         await sql`
-            INSERT INTO daten (fach, modul, quelle, beschreibung, autor, status, typ)
-            VALUES (${fach}, ${modul}, ${quelle}, ${beschreibung}, ${user_id}, ${status}, ${typ})
+            INSERT INTO meldungen (titel, fach, modul, quelle, beschreibung, autor, status, typ, verantwortlicher)
+            VALUES (${titel}, ${fach}, ${modul}, ${quelle}, ${beschreibung}, ${user_id}, ${status}, ${typ}, ${verantwortlicher})
         `;
     } catch (error) {
         // If a database error occurs, return a more specific error.
         return {
-            message: 'Fehler in der Datenbank: Daten nicht gespeichert.',
+            message: 'Fehler in der Datenbank: Daten wurden nicht gespeichert.',
         };
     }
 
