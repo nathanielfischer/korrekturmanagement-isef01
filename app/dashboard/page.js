@@ -1,9 +1,13 @@
-// import IuLogo from "@/app/ui/iu-logo.js";
-// import LogoutButton from "@/app/ui/logout-button.js";
+import RedirectButton from '@/app/ui/dashboard/redirect-button';
+import { PlusCircleIcon } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
+
+  
+
   return (
     <div>
+        <RedirectButton />
 
       <div className="overflow-x-auto rounded-lg border-light-grey">
         <table className="min-w-full border-collapse border">
