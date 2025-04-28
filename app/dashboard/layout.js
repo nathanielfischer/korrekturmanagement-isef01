@@ -11,6 +11,9 @@ export default function Layout({ children }) {
                 {/* <div className="flex items-center justify-end grow"><p>Logout</p></div> */}
                 <LogoutButton className="flex items-center justify-end grow" />
             </header>
+            {/* <main className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+                <div className="grow md:overflow-y-auto">{children}</div>
+            </main> */}
             <main className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-light-grey rounded-md">
                 <div className="grow p-6 md:overflow-y-auto md:p-12">{children}</div>
             </main>

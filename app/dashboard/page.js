@@ -1,29 +1,34 @@
 // import IuLogo from "@/app/ui/iu-logo.js";
 // import LogoutButton from "@/app/ui/logout-button.js";
 
-export default function Home() {
+export default function Dashboard() {
   return (
-    // <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-    //   <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-    //     <IuLogo />
-    //     <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-    //       <li className="tracking-[-.01em]">
-    //         Startseite im Projekt.
-    //       </li>
-    //     </ol>
-    //     <LogoutButton />
-    //   </main>
-    // </div>
     <div>
-      <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-        <li className="tracking-[-.01em]">
-          Startseite im Projekt.
-        </li>
-        <li className="tracking-[-.01em]">
-          Hier kommt die Tabelle hin.
-        </li>
-      </ol>
-      {/* <LogoutButton /> */}
+
+      <div className="overflow-x-auto rounded-lg border-light-grey">
+        <table className="min-w-full border-collapse border">
+          <thead>
+            <tr className="bg-light-grey">
+              <th className="px-6 py-3 text-left text-sm font-medium">Spalte 1</th>
+              <th className="px-6 py-3 text-left text-sm font-medium">Spalte 2</th>
+              <th className="px-6 py-3 text-left text-sm font-medium">Spalte 3</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white">
+            <tr>
+              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 1</td>
+              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 2</td>
+              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 3</td>
+            </tr>
+            <tr>
+              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 4</td>
+              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 5</td>
+              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   );
 }
