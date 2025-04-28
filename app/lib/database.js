@@ -2,7 +2,7 @@
 
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
-import { faecherToArray, moduleToArray } from "@/app/lib/helper";
+import { faecherToArray, moduleToArray, quellenToArray } from "@/app/lib/helper";
 
 export async function getUserIdByEmail(email) {
     noStore();
@@ -63,6 +63,21 @@ export async function getModuleByFach(fach) {
                 WHERE fd.fach = ${fach}
         `;
         return moduleToArray(data.rows);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch Verantwortlichen by Modul.');
+    }
+}
+
+// Erhält alle Quellen aus der Datenbank
+export async function getQuellen() {
+    noStore();
+    try {
+        const data = await sql`
+            SELECT quellen.quelle
+            FROM quellen
+        `;
+        return quellenToArray(data.rows);
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch Verantwortlichen by Modul.');

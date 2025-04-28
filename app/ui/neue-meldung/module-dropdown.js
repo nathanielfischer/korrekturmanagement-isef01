@@ -2,7 +2,7 @@
 
 import Dropdown from "@/app/ui/neue-meldung/dropdown"
 
-export default function Dropdowns({ faecher, module }) {
+export default function Dropdowns({ faecher, module, quellen }) {
 
     return (
         <div>
@@ -14,6 +14,11 @@ export default function Dropdowns({ faecher, module }) {
             <Dropdown
                 items={module}
                 heading={"Modul"}
+            />
+
+            <Dropdown
+                items={quellen}
+                heading={"Quelle"}
             />
         </div>
     );

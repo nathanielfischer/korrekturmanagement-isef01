@@ -1,16 +1,22 @@
-import { getFaecher, getModuleByFach } from "@/app/lib/database";
+import { getFaecher, getModuleByFach, getQuellen } from "@/app/lib/database";
 import Dropdowns from "../../ui/neue-meldung/module-dropdown";
 
 // export const dynamic = "force-dynamic";
 
 export default async function NeueMeldung( {searchParams}) {
+    // Fächer Auswahl
     const faecher = await getFaecher();
 
+    // Module aus searchParams Auswahl
+    //TODO: handle Leerzeichen !!!!!!!!!!!!!!!!!!!!!!!!!!!
     const params = await searchParams;
     const selectedFach = params.fach;
-    //TODO: handle Leerzeichen !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
     const module = await getModuleByFach(selectedFach);
+
+    // Quelle Auswahl
+    const quellen = await getQuellen();
+
+    // Typ Auswahl
 
 
     return (
@@ -18,16 +24,8 @@ export default async function NeueMeldung( {searchParams}) {
             <Dropdowns
                 faecher={faecher}
                 module ={module}
+                quellen={quellen}
             />
-
-            {/* {fach !== "" ?
-                <Dropdown
-                    items={module}
-                    heading={"Modul"}
-                />
-                : ""} */}
-
-
         </div>
     );
 }

@@ -20,3 +20,14 @@ export function moduleToArray(moduleObjectArray) {
 
     return moduleArray;
 }
+
+export function quellenToArray(quellenObjectArray) {
+    const quelleArray = [];
+
+    quellenObjectArray.map((quellen) => (
+        quelleArray.push(quellen.quelle)
+    ));
+
+    return quelleArray;
+}
+
