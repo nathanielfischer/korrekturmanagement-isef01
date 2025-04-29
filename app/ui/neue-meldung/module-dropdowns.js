@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Dropdowns({ faecher, module, quellen, typen }) {
 
     return (
-        <div>
+        <div className="p-4 md:p-0">
             <div className="mb-4">
                 <label htmlFor="customInput" className="block text-sm font-medium text-gray-700">
                     Titel eingeben
