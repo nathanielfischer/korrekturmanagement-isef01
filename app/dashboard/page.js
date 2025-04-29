@@ -1,4 +1,4 @@
-import RedirectButton from '@/app/ui/dashboard/neue-meldung-button';
+import NeueMeldungButton from '@/app/ui/dashboard/neue-meldung-button';
 import StatusBadge from '@/app/ui/status-badge';
 
 
@@ -15,7 +15,7 @@ export default function Dashboard() {
               <th className="px-6 py-3 text-sm font-medium w-full">
                 <div className="flex justify-between items-center">
                   <div>TODO: Filtermöglichkeiten</div>
-                  <div className="ml-auto"><RedirectButton /></div>
+                  <div className="ml-auto"><NeueMeldungButton /></div>
                 </div>
               </th>
             </tr>

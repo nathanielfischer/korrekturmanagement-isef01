@@ -15,7 +15,7 @@ export default function Layout({ children }) {
                 <div className="grow md:overflow-y-auto">{children}</div>
             </main> */}
             <main className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-light-grey rounded-md">
-                <div className="grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+                <div className="grow p-2 md:overflow-y-auto md:p-12">{children}</div>
             </main>
         </div>
 
