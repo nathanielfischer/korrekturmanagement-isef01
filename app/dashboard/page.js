@@ -14,7 +14,7 @@ export default function Dashboard() {
             <tr className="bg-light-grey">
               <th className="px-6 py-3 text-sm font-medium w-full">
                 <div className="flex justify-between items-center">
-                  <div>Filtermöglichkeiten</div>
+                  <div>TODO: Filtermöglichkeiten</div>
                   <div className="ml-auto"><RedirectButton /></div>
                 </div>
               </th>
@@ -39,7 +39,7 @@ export default function Dashboard() {
               <td className="px-6 py-4 border-b border-light-grey text-sm" colSpan="3">
                 <div className="flex justify-between items-center">
                   <div>
-                    <div className="mb-1 text-base">#2 - Titel</div>
+                    <div className="mb-1 text-base">#1 - Titel</div>
                     <div className="text-gray-500 text-xs">
                       01.01.2025, Wirtschaftsinformatik, ISEF01, Ergänzung, Tobias Brückmann
                     </div>

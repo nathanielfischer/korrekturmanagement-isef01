@@ -31,3 +31,13 @@ export function quellenToArray(quellenObjectArray) {
     return quelleArray;
 }
 
+export function typenToArray(typenObjectArray) {
+    const typenArray = [];
+
+    typenObjectArray.map((typen) => (
+        typenArray.push(typen.typ)
+    ));
+
+    return typenArray;
+}
+

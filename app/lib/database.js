@@ -2,7 +2,7 @@
 
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
-import { faecherToArray, moduleToArray, quellenToArray } from "@/app/lib/helper";
+import { faecherToArray, moduleToArray, quellenToArray, typenToArray } from "@/app/lib/helper";
 
 export async function getUserIdByEmail(email) {
     noStore();
@@ -55,6 +55,7 @@ export async function getFaecher() {
 // Erhält alle Module für ein bestimmtes Fach aus der Datenbank
 export async function getModuleByFach(fach) {
     noStore();
+
     try {
         const data = await sql`
             SELECT module.modul
@@ -84,3 +85,17 @@ export async function getQuellen() {
     }
 }
 
+// Erhält alle Typen (Fehler, Ergänzung, ..) aus der Datenbank
+export async function getTypen() {
+    noStore();
+    try {
+        const data = await sql`
+            SELECT typen.typ
+            FROM typen
+        `;
+        return typenToArray(data.rows);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch Typen.');
+    }
+}

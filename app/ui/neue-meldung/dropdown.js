@@ -3,7 +3,7 @@
 import { DocumentChartBarIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { getFaecher, getModuleByFach } from "@/app/lib/database";
+import { getModuleByFach } from "@/app/lib/database";
 
 
 export default function Dropdown({ items, heading }) {
@@ -28,6 +28,8 @@ export default function Dropdown({ items, heading }) {
                     name={heading}
                     className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                     aria-describedby="customer-error"
+                    defaultValue={'DEFAULT'}
+                    required
                     onChange={(e) => {
                         if (heading === "Fach") {
                             setSelectedItem(e.currentTarget.value);
@@ -35,7 +37,7 @@ export default function Dropdown({ items, heading }) {
                     }}
                     
                 >
-                    <option value="default">
+                    <option value='DEFAULT' disabled>
                         {heading} auswählen
                     </option>
 
