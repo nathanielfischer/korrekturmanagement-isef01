@@ -1,13 +1,16 @@
-import RedirectButton from '@/app/ui/dashboard/redirect-button';
-import { PlusCircleIcon } from '@heroicons/react/24/outline';
+import RedirectButton from '@/app/ui/dashboard/neue-meldung-button';
+
+
 
 export default function Dashboard() {
 
-  
 
   return (
     <div>
+      <div className="flex justify-end mb-4">
         <RedirectButton />
+      </div>
+
 
       <div className="overflow-x-auto rounded-lg border-light-grey">
         <table className="min-w-full border-collapse border">
@@ -20,14 +23,21 @@ export default function Dashboard() {
           </thead>
           <tbody className="bg-white">
             <tr>
-              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 1</td>
-              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 2</td>
-              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 3</td>
+              <td className="px-6 py-4 border-b border-light-grey text-sm" colSpan="3">
+                <div>
+                  <div className="flex justify-between">
+                    <div>Meldung 1 - Titel</div>
+                    <div>Status</div>
+                  </div>
+                  <div className="text-gray-500 text-xs">Zusätzliche Information</div>
+                </div>
+              </td>
             </tr>
+
             <tr>
-              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 4</td>
-              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 5</td>
-              <td className="px-6 py-4 border-b border-gray-200 text-sm">Daten 6</td>
+              <td className="px-6 py-4 border-b border-light-grey text-sm">Meldung 2</td>
+              <td className="px-6 py-4 border-b border-light-grey text-sm">Titel</td>
+              <td className="px-6 py-4 border-b border-light-grey text-sm">Status</td>
             </tr>
           </tbody>
         </table>
