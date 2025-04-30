@@ -24,7 +24,7 @@ export async function getVerantwortlichenByModul(modul) {
     noStore();
     try {
         const data = await sql`
-            SELECT module.modul, users.name
+            SELECT users.user_id
             FROM module
             INNER JOIN users ON module.verantwortlicher = users.user_id
             WHERE module.modul = ${modul}

@@ -74,31 +74,47 @@ export async function createNewUser(prevState, formData) {
 export async function createMeldung(prevState, formData) {
     // gets the ID of the current user
     const user_id = await getLoggedInUsersId();
+
     // gets the Verantwortlichen for the selected Modul
-    const verantwortlicher = getVerantwortlichenByModul(formData.get('modul'));
+    const verantwortlicherData = await getVerantwortlichenByModul(formData.get('Modul'));
+    console.log(verantwortlicherData);
+    
+    
+    if (!verantwortlicherData) {
+        return {
+            message: 'Fehler: Kein Verantwortlicher für dieses Modul gefunden.',
+        };
+    }
 
     const status = "Offen";
 
     // Prepare data for insertion into the database
     const { titel, typ, fach, modul, quelle, beschreibung } = {
         titel: formData.get("titel"),
-        typ: formData.get("typ"),
-        fach: formData.get("fach"),
-        modul: formData.get('modul'),
-        quelle: formData.get('quelle'),
+        typ: formData.get("Typ"),
+        fach: formData.get("Fach"),
+        modul: formData.get('Modul'),
+        quelle: formData.get('Quelle'),
         beschreibung: formData.get('beschreibung')
     };
+
+    // Validate required fields
+    if (!titel || !typ || !fach || !modul || !quelle || !beschreibung) {
+        return {
+            message: 'Fehler: Bitte alle Felder ausfüllen.',
+        };
+    }
 
     // Insert data into the database
     try {
         await sql`
             INSERT INTO meldungen (titel, fach, modul, quelle, beschreibung, autor, status, typ, verantwortlicher)
-            VALUES (${titel}, ${fach}, ${modul}, ${quelle}, ${beschreibung}, ${user_id}, ${status}, ${typ}, ${verantwortlicher})
+            VALUES (${titel}, ${fach}, ${modul}, ${quelle}, ${beschreibung}, ${user_id}, ${status}, ${typ}, ${verantwortlicherData.user_id})
         `;
     } catch (error) {
-        // If a database error occurs, return a more specific error.
+        console.error('Database Error:', error);
         return {
-            message: 'Fehler in der Datenbank: Daten wurden nicht gespeichert.',
+            message: 'Fehler in der Datenbank: ' + error.message,
         };
     }
 
@@ -106,18 +122,6 @@ export async function createMeldung(prevState, formData) {
     revalidatePath('/dashboard');
     redirect('/dashboard');
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 export async function getLoggedInUser() {
     'use server';
