@@ -44,6 +44,7 @@ export async function getFaecher() {
         const data = await sql`
             SELECT faecher.fach
             FROM faecher 
+            ORDER BY faecher.fach ASC
         `;
         return faecherToArray(data.rows);
     } catch (error) {
@@ -62,6 +63,7 @@ export async function getModuleByFach(fach) {
                 FROM faecher_module fd 
             INNER JOIN module ON module.modul = fd.modul
                 WHERE fd.fach = ${fach}
+            ORDER BY module.modul ASC
         `;
         return moduleToArray(data.rows);
     } catch (error) {
@@ -77,6 +79,7 @@ export async function getQuellen() {
         const data = await sql`
             SELECT quellen.quelle
             FROM quellen
+            ORDER BY quellen.quelle ASC
         `;
         return quellenToArray(data.rows);
     } catch (error) {
@@ -92,10 +95,27 @@ export async function getTypen() {
         const data = await sql`
             SELECT typen.typ
             FROM typen
+            ORDER BY typen.typ ASC
         `;
         return typenToArray(data.rows);
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch Typen.');
+    }
+}
+
+// Erhält alle Module aus der Datenbank
+export async function getModule() {
+    noStore();
+    try {
+        const data = await sql`
+            SELECT module.modul
+            FROM module
+            ORDER BY module.modul ASC
+        `;
+        return moduleToArray(data.rows);
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch Module.');
     }
 }

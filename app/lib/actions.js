@@ -86,6 +86,7 @@ export async function createMeldung(prevState, formData) {
         };
     }
 
+    // Status ist bei Erstellung einer Meldung standardmäßig "Offen"
     const status = "Offen";
 
     // Prepare data for insertion into the database

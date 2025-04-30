@@ -37,7 +37,7 @@ export default function Dropdown({ items, heading }) {
                     }}
                     
                 >
-                    <option value='DEFAULT' disabled>
+                    <option value='DEFAULT' disabled hidden>
                         {heading} auswählen
                     </option>
 

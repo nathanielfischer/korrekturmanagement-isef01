@@ -1,10 +1,13 @@
 import NeueMeldungButton from '@/app/ui/dashboard/neue-meldung-button';
 import StatusBadge from '@/app/ui/status-badge';
+import FilterDropdown from '@/app/ui/dashboard/filter-dropdown';
+import { getFaecher, getModule } from '@/app/lib/database';
 
-
-
-export default function Dashboard() {
-
+export default async function Dashboard() {
+  const statusArray = ["Offen", "In Bearbeitung", "Erledigt", "Abgelehnt"];
+  const typArray = ["Fehler", "Ergänzung", "Sonstiges"];
+  const faecherArray = await getFaecher();
+  const moduleArray = await getModule();
 
   return (
     <div>
@@ -14,8 +17,27 @@ export default function Dashboard() {
             <tr className="bg-light-grey">
               <th className="px-6 py-3 text-sm font-medium w-full">
                 <div className="flex justify-between items-center">
-                  <div>TODO: Filtermöglichkeiten</div>
-                  <div className="ml-auto"><NeueMeldungButton /></div>
+                  <div className="flex gap-4">
+                    <FilterDropdown 
+                      heading="Status"
+                      filterArray={statusArray}
+                    />
+                    <FilterDropdown 
+                      heading="Typ"
+                      filterArray={typArray}
+                    />
+                    <FilterDropdown 
+                      heading="Fach"
+                      filterArray={faecherArray}
+                    />
+                    <FilterDropdown 
+                      heading="Modul"
+                      filterArray={moduleArray}
+                    />
+                  </div>
+                  <div className="ml-auto">
+                    <NeueMeldungButton />
+                  </div>
                 </div>
               </th>
             </tr>
