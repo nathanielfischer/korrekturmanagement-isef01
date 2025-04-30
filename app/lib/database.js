@@ -18,7 +18,6 @@ export async function getUserIdByEmail(email) {
     }
 }
 
-//TODO: Funktion testen
 //Modul als input
 export async function getVerantwortlichenByModul(modul) {
     noStore();
@@ -35,6 +34,23 @@ export async function getVerantwortlichenByModul(modul) {
         throw new Error('Failed to fetch Verantwortlichen by Modul.');
     }
 }
+
+
+// //TODO: nicht getestet!
+// export async function getUserNameById(id) {
+//     noStore();
+//     try {
+//         const data = await sql`
+//             SELECT users.name
+//             FROM users
+//             WHERE users.user_id = ${id}
+//         `;
+//         return data.rows[0];
+//     } catch (error) {
+//         console.error('Database Error:', error);
+//         throw new Error('Failed to fetch UserName by Id.');
+//     }
+// }
 
 
 // Erhält alle Fächer aus der Datenbank
@@ -117,5 +133,29 @@ export async function getModule() {
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch Module.');
+    }
+}
+
+export async function getMeldungen() {
+    noStore();
+    try {
+        const data = await sql`
+            SELECT 
+                meldungen.meldung_id, 
+                meldungen.titel, 
+                meldungen.datum, 
+                meldungen.fach, 
+                meldungen.modul, 
+                meldungen.typ,
+                meldungen.status,
+                users.name as verantwortlicher_name
+            FROM meldungen
+            INNER JOIN users ON meldungen.verantwortlicher = users.user_id
+            ORDER BY meldungen.meldung_id DESC
+        `;
+        return data.rows;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch Meldungen.');
     }
 }
