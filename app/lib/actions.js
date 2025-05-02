@@ -9,6 +9,12 @@ import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
 
+/**
+ * Authentifizierung des Benutzers
+ * @param {Object} prevState - Vorheriger Zustand
+ * @param {FormData} formData - Formulardaten mit E-Mail und Passwort
+ * @returns {string|undefined} Fehlermeldung oder undefined bei Erfolg
+ */
 export async function authenticate(prevState, formData) {
     try {
         await signIn('credentials', formData);
@@ -25,6 +31,11 @@ export async function authenticate(prevState, formData) {
     }
 }
 
+/**
+ * Neuen Benutzer erstellen
+ * @param {Object} prevState - Vorheriger Zustand
+ * @param {FormData} formData - Formulardaten mit Name, E-Mail und Passwort
+ */
 export async function createNewUser(prevState, formData) {
     const { name, email, password } = {
         name: formData.get('name'),
@@ -49,7 +60,10 @@ export async function createNewUser(prevState, formData) {
             `;
 
         } else {
-            //TODO: Error: email already existing
+            console.log('User already exists');
+            return {
+                message: 'Fehler: E-Mail-Adresse bereits vergeben.',
+            };
         }
 
     } catch (error) {
@@ -69,17 +83,22 @@ export async function createNewUser(prevState, formData) {
 }
 
 
-//TODO: Funktion testen
-// Datum und meldung_id werden automatisch von Postgres vergeben!
+/**
+ * Neue Meldung erstellen
+ * Datum und meldung_id werden automatisch von Postgres vergeben!
+ * @param {Object} prevState - Vorheriger Zustand
+ * @param {FormData} formData - Formulardaten der Meldung
+ * @returns {Object} Fehlermeldung oder undefined bei Erfolg
+ */
 export async function createMeldung(prevState, formData) {
-    // gets the ID of the current user
+    // Erhält die ID des aktuell angemeldeten Benutzers
     const user_id = await getLoggedInUsersId();
 
-    // gets the Verantwortlichen for the selected Modul
+    // Erhält den Verantwortlichen für das ausgewählte Modul
     const verantwortlicherData = await getVerantwortlichenByModul(formData.get('Modul'));
     console.log(verantwortlicherData);
-    
-    
+
+
     if (!verantwortlicherData) {
         return {
             message: 'Fehler: Kein Verantwortlicher für dieses Modul gefunden.',
@@ -89,7 +108,7 @@ export async function createMeldung(prevState, formData) {
     // Status ist bei Erstellung einer Meldung standardmäßig "Offen"
     const status = "Offen";
 
-    // Prepare data for insertion into the database
+    // Daten aus dem Formular extrahieren
     const { titel, typ, fach, modul, quelle, beschreibung } = {
         titel: formData.get("titel"),
         typ: formData.get("Typ"),
@@ -99,14 +118,14 @@ export async function createMeldung(prevState, formData) {
         beschreibung: formData.get('beschreibung')
     };
 
-    // Validate required fields
+    // Überprüfen, ob alle erforderlichen Felder ausgefüllt sind
     if (!titel || !typ || !fach || !modul || !quelle || !beschreibung) {
         return {
             message: 'Fehler: Bitte alle Felder ausfüllen.',
         };
     }
 
-    // Insert data into the database
+    // Datenbankabfrage zur Erstellung der Meldung
     try {
         await sql`
             INSERT INTO meldungen (titel, fach, modul, quelle, beschreibung, autor, status, typ, verantwortlicher)
@@ -119,11 +138,17 @@ export async function createMeldung(prevState, formData) {
         };
     }
 
-    // Revalidate the cache and redirect the user.
+    // Pfad zur Seite "/dashboard" neu validieren und weiterleiten
     revalidatePath('/dashboard');
     redirect('/dashboard');
 }
 
+
+/**
+ * Benutzerinformationen des aktuell angemeldeten Benutzers abrufen
+ * @returns {Object} Benutzerinformationen
+ * @throws {Error} Bei Fehlern während der Authentifizierung
+ */
 export async function getLoggedInUser() {
     'use server';
     try {
@@ -134,12 +159,16 @@ export async function getLoggedInUser() {
     }
 }
 
+/**
+ * Benutzer-ID des aktuell angemeldeten Benutzers abrufen
+ * @returns {string} Benutzer-ID
+ * @throws {Error} Bei Fehlern während der Authentifizierung
+ */
 export async function getLoggedInUsersId() {
     try {
         const user = await auth();
         let user_id = await getUserIdByEmail(user.user.email);
         user_id = user_id.user_id
-
         return user_id;
     } catch (error) {
         throw error;

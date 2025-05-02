@@ -4,6 +4,11 @@ import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
 import { faecherToArray, moduleToArray, quellenToArray, typenToArray } from "@/app/lib/helper";
 
+/**
+ * Benutzer-ID anhand der E-Mail-Adresse abrufen
+ * @param {string} email - E-Mail-Adresse des Benutzers
+ * @returns {Object} Benutzer-ID oder undefined
+ */
 export async function getUserIdByEmail(email) {
     noStore();
     try {
@@ -18,7 +23,11 @@ export async function getUserIdByEmail(email) {
     }
 }
 
-//Modul als input
+/**
+ * Verantwortlichen für ein bestimmtes Modul finden
+ * @param {string} modul - Modulbezeichnung (z.B. 'ISEF01')
+ * @returns {Object} Benutzer-ID des Verantwortlichen
+ */
 export async function getVerantwortlichenByModul(modul) {
     noStore();
     try {
@@ -53,7 +62,10 @@ export async function getVerantwortlichenByModul(modul) {
 // }
 
 
-// Erhält alle Fächer aus der Datenbank
+/**
+ * Alle verfügbaren Fächer aus der Datenbank abrufen
+ * @returns {Array} Liste der Fächer
+ */
 export async function getFaecher() {
     noStore();
     try {
@@ -69,7 +81,11 @@ export async function getFaecher() {
     }
 }
 
-// Erhält alle Module für ein bestimmtes Fach aus der Datenbank
+/**
+ * Module für ein bestimmtes Fach abrufen
+ * @param {string} fach - Bezeichnung des Fachs (z.B. 'Informatik')
+ * @returns {Array} Liste der Module
+ */
 export async function getModuleByFach(fach) {
     noStore();
 
@@ -88,7 +104,10 @@ export async function getModuleByFach(fach) {
     }
 }
 
-// Erhält alle Quellen aus der Datenbank
+/**
+ * Alle Quellen aus der Datenbank abrufen
+ * @returns {Array} Liste der Quellen
+ */
 export async function getQuellen() {
     noStore();
     try {
@@ -104,7 +123,10 @@ export async function getQuellen() {
     }
 }
 
-// Erhält alle Typen (Fehler, Ergänzung, ..) aus der Datenbank
+/**
+ * Alle Typen aus der Datenbank abrufen
+ * @returns {Array} Liste der Typen
+ */
 export async function getTypen() {
     noStore();
     try {
@@ -120,7 +142,10 @@ export async function getTypen() {
     }
 }
 
-// Erhält alle Module aus der Datenbank
+/**
+ * Alle Module aus der Datenbank abrufen
+ * @returns {Array} Liste der Module
+ */
 export async function getModule() {
     noStore();
     try {
@@ -136,6 +161,10 @@ export async function getModule() {
     }
 }
 
+/**
+ * Alle Meldungen mit zugehöriger Verantwortlicher Person abrufen
+ * @returns {Array} Liste aller Meldungen mit Metadaten
+ */
 export async function getMeldungen() {
     noStore();
     try {

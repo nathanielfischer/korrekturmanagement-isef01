@@ -4,8 +4,10 @@ import FilterDropdown from '@/app/ui/dashboard/filter-dropdown';
 import { getFaecher, getModule, getMeldungen } from '@/app/lib/database';
 
 export default async function Dashboard() {
+  // Vorgegebene Arrays für die verschiedenen Filter-Dropdowns
   const statusArray = ["Offen", "In Bearbeitung", "Erledigt", "Abgelehnt"];
   const typArray = ["Fehler", "Ergänzung", "Sonstiges"];
+  // Daten aus der Datenbank für die weiteren Filter-Dropdowns laden
   const faecherArray = await getFaecher();
   const moduleArray = await getModule();
   const meldungen = await getMeldungen();
@@ -14,6 +16,7 @@ export default async function Dashboard() {
     <div>
       <div className="overflow-x-auto rounded-lg border-light-grey">
         <table className="min-w-full border-collapse border">
+          {/* Filter-Bereich mit Dropdowns */}
           <thead>
             <tr className="bg-light-grey">
               <th className="px-6 py-3 text-sm font-medium w-full">
@@ -43,8 +46,10 @@ export default async function Dashboard() {
               </th>
             </tr>
           </thead>
+          {/* Meldungsliste */}
           <tbody className="bg-white">
             {meldungen.map((meldung) => (
+              // Einzelne Meldung mit Titel, Metadaten und Status
               <tr key={meldung.meldung_id}>
                 <td className="px-6 py-4 border-b border-light-grey text-sm" colSpan="3">
                   <div className="flex justify-between items-center">

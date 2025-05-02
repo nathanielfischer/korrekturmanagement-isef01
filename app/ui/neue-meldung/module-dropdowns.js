@@ -6,11 +6,19 @@ import Link from "next/link";
 import { useActionState } from 'react';
 import { createMeldung } from '@/app/lib/actions';
 
+/**
+ * Hauptkomponente für das Formular zur Erstellung einer neuen Fehlermeldung
+ * @param {Array} faecher - Liste der verfügbaren Fächer
+ * @param {Array} module - Liste der Module für das ausgewählte Fach
+ * @param {Array} quellen - Liste der möglichen Quellen
+ * @param {Array} typen - Liste der Typen
+ * @returns {JSX.Element} Formular mit Dropdown-Menüs und Eingabefeldern
+ */
 export default function Dropdowns({ faecher, module, quellen, typen }) {
+    // State für Formular-Übermittlung und Fehlermeldungen
     const [errorMessage, formAction, isPending] = useActionState(createMeldung, undefined);
 
     return (
-        // Render the form for creating a new "Meldung" with dropdowns and input fields
         <form action={formAction}>
             <div className="p-4 md:p-0">
                 <div className="mb-4">
@@ -80,6 +88,11 @@ export default function Dropdowns({ faecher, module, quellen, typen }) {
     );
 }
 
+/**
+ * Button-Komponente zum Speichern des Formulars
+ * @param {boolean} isPending - Status der Formular-Übermittlung
+ * @returns {JSX.Element} Speichern-Button mit Ladezustand
+ */
 function SaveButton({ isPending }) {
     return (
         <Button className="mt-4" aria-disabled={isPending}>
@@ -88,6 +101,10 @@ function SaveButton({ isPending }) {
     );
 }
 
+/**
+ * Button-Komponente zum Abbrechen der Eingabe
+ * @returns {JSX.Element} Abbrechen-Button mit Link zur Dashboard
+ */
 function CancelButton() {
     return (
         <Link href="/dashboard">
