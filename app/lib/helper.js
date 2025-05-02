@@ -1,5 +1,8 @@
-
-
+/**
+ * Konvertiert ein Array von Fächer-Objekten in ein Array von Fächernamen
+ * @param {Array} faecherObjectArray - Array von Objekten mit fach-Eigenschaft
+ * @returns {Array} Array mit Fächernamen
+ */
 export function faecherToArray(faecherObjectArray) {
     const faecherArray = [];
 
@@ -10,7 +13,11 @@ export function faecherToArray(faecherObjectArray) {
     return faecherArray;
 }
 
-
+/**
+ * Konvertiert ein Array von Modul-Objekten in ein Array von Modulnamen
+ * @param {Array} moduleObjectArray - Array von Objekten mit modul-Eigenschaft
+ * @returns {Array} Array mit Modulnamen
+ */
 export function moduleToArray(moduleObjectArray) {
     const moduleArray = [];
 
@@ -21,6 +28,11 @@ export function moduleToArray(moduleObjectArray) {
     return moduleArray;
 }
 
+/**
+ * Konvertiert ein Array von Quellen-Objekten in ein Array von Quellennamen
+ * @param {Array} quellenObjectArray - Array von Objekten mit quelle-Eigenschaft
+ * @returns {Array} Array mit Quellennamen
+ */
 export function quellenToArray(quellenObjectArray) {
     const quelleArray = [];
 
@@ -31,6 +43,11 @@ export function quellenToArray(quellenObjectArray) {
     return quelleArray;
 }
 
+/**
+ * Konvertiert ein Array von Typen-Objekten in ein Array von Typennamen
+ * @param {Array} typenObjectArray - Array von Objekten mit typ-Eigenschaft
+ * @returns {Array} Array mit Typennamen
+ */
 export function typenToArray(typenObjectArray) {
     const typenArray = [];
 

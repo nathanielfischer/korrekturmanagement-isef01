@@ -188,3 +188,34 @@ export async function getMeldungen() {
         throw new Error('Failed to fetch Meldungen.');
     }
 }
+
+/**
+ * Eine spezifische Meldung anhand ihrer ID abrufen
+ * @param {string} id - Die ID der Meldung
+ * @returns {Object} Meldung mit allen Details
+ */
+export async function getMeldungById(id) {
+    noStore();
+    try {
+        const data = await sql`
+            SELECT 
+                meldungen.meldung_id,
+                meldungen.titel,
+                meldungen.datum,
+                meldungen.fach,
+                meldungen.modul,
+                meldungen.quelle,
+                meldungen.typ,
+                meldungen.status,
+                meldungen.beschreibung,
+                users.name as verantwortlicher_name
+            FROM meldungen
+            INNER JOIN users ON meldungen.verantwortlicher = users.user_id
+            WHERE meldungen.meldung_id = ${id}
+        `;
+        return data.rows[0];
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch Meldung by ID.');
+    }
+}
