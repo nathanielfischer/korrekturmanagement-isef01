@@ -174,3 +174,24 @@ export async function getLoggedInUsersId() {
         throw error;
     }
 }
+
+/**
+ * Status einer Meldung ändern
+ * @param {string} meldungId - ID der zu aktualisierenden Meldung
+ * @param {string} newStatus - Neuer Status der Meldung
+ * @returns {Object} Fehlermeldung oder undefined bei Erfolg
+ */
+export async function changeStatus(meldungId, newStatus) {
+    try {
+        await sql`
+            UPDATE meldungen
+            SET status = ${newStatus}
+            WHERE meldung_id = ${meldungId}
+        `;
+        revalidatePath('/dashboard');
+    } catch (error) {
+        return {
+            message: 'Fehler beim Aktualisieren des Status: ' + error.message,
+        };
+    }
+}
