@@ -11,9 +11,9 @@ import { Fragment } from 'react';
  * @param {string} props.params.id - Die ID der anzuzeigenden Meldung
  * @returns {Promise<JSX.Element>} Die gerenderte Meldungsdetailansicht
  */
-export default async function MeldungPage({ searchParams }) {
-    const params = await searchParams;
-    const meldung = await getMeldungById(params.id);
+export default async function MeldungPage({ params }) {
+    const { id } = params;
+    const meldung = await getMeldungById(id);
 
     if (!meldung) {
         notFound();
