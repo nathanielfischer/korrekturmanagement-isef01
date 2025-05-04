@@ -6,7 +6,6 @@ import Link from 'next/link';
 
 export default async function Dashboard() {
   // Vorgegebene Arrays für die verschiedenen Filter-Dropdowns
-  // Vorgegebene Arrays für die verschiedenen Filter-Dropdowns
   const statusArray = ["Offen", "In Bearbeitung", "Erledigt", "Abgelehnt"];
   const typArray = ["Fehler", "Ergänzung", "Sonstiges"];
   const faecherArray = await getFaecher();
