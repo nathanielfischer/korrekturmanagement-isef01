@@ -1,5 +1,5 @@
 import { getFaecher, getModuleByFach, getQuellen, getTypen } from "@/app/lib/database";
-import Dropdowns from "../../ui/neue-meldung/module-dropdowns";
+import Dropdowns from "@/app/ui/neue-meldung/module-dropdowns";
 
 // Dynamisches Rendering deaktiviert um Caching zu ermöglichen
 // export const dynamic = "force-dynamic";

@@ -1,6 +1,6 @@
 'use client';
 
-import Dropdown from "@/app/ui/neue-meldung/dropdown"
+import Dropdown from "@/app/ui/neue-meldung/dropdown";
 import { Button } from "@/app/ui/button";
 import Link from "next/link";
 import { useActionState } from 'react';

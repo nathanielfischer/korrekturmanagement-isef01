@@ -12,7 +12,7 @@ import { Fragment } from 'react';
  * @returns {Promise<JSX.Element>} Die gerenderte Meldungsdetailansicht
  */
 export default async function MeldungPage({ params }) {
-    const { id } = params;
+    const { id } = await params;
     const meldung = await getMeldungById(id);
 
     if (!meldung) {

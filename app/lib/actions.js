@@ -1,13 +1,12 @@
 'use server';
 
-import { signIn, auth } from '@/auth';
-import { AuthError } from 'next-auth';
-import { getUserIdByEmail, getVerantwortlichenByModul } from "@/app/lib/database";
 import { sql } from '@vercel/postgres';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 import bcrypt from 'bcrypt';
-import { redirect } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
-
+import { getUserIdByEmail, getVerantwortlichenByModul } from '@/app/lib/database';
 
 /**
  * Authentifizierung des Benutzers

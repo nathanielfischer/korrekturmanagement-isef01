@@ -2,7 +2,7 @@
 
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
-import { faecherToArray, moduleToArray, quellenToArray, typenToArray } from "@/app/lib/helper";
+import { faecherToArray, moduleToArray, quellenToArray, typenToArray } from '@/app/lib/helper';
 
 /**
  * Benutzer-ID anhand der E-Mail-Adresse abrufen
