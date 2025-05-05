@@ -219,3 +219,70 @@ export async function getMeldungById(id) {
         throw new Error('Failed to fetch Meldung by ID.');
     }
 }
+
+
+/**
+ * Gefilterte Meldungen mit zugehöriger verantwortlicher Person abrufen
+ * @param {Object} filter - Filterobjekt mit optionalen Parametern
+ * @param {string} [filter.status] - Status der Meldung
+ * @param {string} [filter.typ] - Typ der Meldung
+ * @param {string} [filter.fach] - Zugehöriges Fach
+ * @param {string} [filter.modul] - Zugehöriges Modul
+ * @returns {Array} Liste der gefilterten Meldungen mit Metadaten
+ */
+export async function getMeldungenFiltered(filter) {
+    noStore();
+    try {
+        // Basis-Query erstellen
+        let query = `
+            SELECT 
+                meldungen.meldung_id, 
+                meldungen.titel, 
+                meldungen.datum, 
+                meldungen.fach, 
+                meldungen.modul, 
+                meldungen.typ,
+                meldungen.status,
+                users.name as verantwortlicher_name
+            FROM meldungen
+            INNER JOIN users ON meldungen.verantwortlicher = users.user_id
+            WHERE 1=1
+        `;
+
+        // Array für die Parameterwerte
+        const values = [];
+        let paramCount = 1;
+
+        // Filter dynamisch hinzufügen
+        if (filter.status) {
+            query += ` AND meldungen.status = $${paramCount}`;
+            values.push(filter.status);
+            paramCount++;
+        }
+        if (filter.typ) {
+            query += ` AND meldungen.typ = $${paramCount}`;
+            values.push(filter.typ);
+            paramCount++;
+        }
+        if (filter.fach) {
+            query += ` AND meldungen.fach = $${paramCount}`;
+            values.push(filter.fach);
+            paramCount++;
+        }
+        if (filter.modul) {
+            query += ` AND meldungen.modul = $${paramCount}`;
+            values.push(filter.modul);
+            paramCount++;
+        }
+
+        // Sortierung hinzufügen
+        query += ` ORDER BY meldungen.meldung_id DESC`;
+
+        // Query ausführen
+        const data = await sql.query(query, values);
+        return data.rows;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch filtered Meldungen.');
+    }
+}

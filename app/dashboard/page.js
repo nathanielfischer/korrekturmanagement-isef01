@@ -1,7 +1,7 @@
 import NeueMeldungButton from '@/app/ui/dashboard/neue-meldung-button';
 import StatusBadge from '@/app/ui/status-badge';
 import FilterDropdown from '@/app/ui/dashboard/filter-dropdown';
-import { getFaecher, getModule, getMeldungen } from '@/app/lib/database';
+import { getFaecher, getModule, getMeldungen, getMeldungenFiltered } from '@/app/lib/database';
 import Link from 'next/link';
 
 export default async function Dashboard() {
@@ -10,7 +10,14 @@ export default async function Dashboard() {
   const typArray = ["Fehler", "Ergänzung", "Sonstiges"];
   const faecherArray = await getFaecher();
   const moduleArray = await getModule();
-  const meldungen = await getMeldungen();
+  const meldungen = await getMeldungenFiltered(
+    {
+      status: '',
+      typ: '',
+      fach: '',
+      modul: ''
+    }
+  );
 
   return (
     <div>
