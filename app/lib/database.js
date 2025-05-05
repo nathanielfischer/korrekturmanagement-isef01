@@ -44,23 +44,26 @@ export async function getVerantwortlichenByModul(modul) {
     }
 }
 
-
-// //TODO: nicht getestet!
-// export async function getUserNameById(id) {
+// /**
+//  * Alle verfügbaren Verantwortlichen aus der Datenbank abrufen
+//  * @returns {Array} Liste aller Verantwortlichen (Name)
+//  */
+// export async function getVerantwortliche() {
 //     noStore();
 //     try {
 //         const data = await sql`
-//             SELECT users.name
-//             FROM users
-//             WHERE users.user_id = ${id}
+//             SELECT module.verantwortlicher as id, users.name
+//             FROM module
+//             INNER JOIN users ON module.verantwortlicher = users.user_id
+//             GROUP  BY module.verantwortlicher, users.name
+//             ORDER BY users.name ASC
 //         `;
-//         return data.rows[0];
+//         return //TODO;
 //     } catch (error) {
 //         console.error('Database Error:', error);
-//         throw new Error('Failed to fetch UserName by Id.');
+//         throw new Error('Failed to fetch Verantwortliche.');
 //     }
 // }
-
 
 /**
  * Alle verfügbaren Fächer aus der Datenbank abrufen
