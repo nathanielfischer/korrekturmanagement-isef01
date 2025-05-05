@@ -1,55 +1,42 @@
-import NeueMeldungButton from '@/app/ui/dashboard/neue-meldung-button';
+import { getFaecher, getModule, getMeldungenFiltered, getModuleByFach } from '@/app/lib/database';
+import FilterSection from '@/app/ui/dashboard/filter-section';
 import StatusBadge from '@/app/ui/status-badge';
-import FilterDropdown from '@/app/ui/dashboard/filter-dropdown';
-import { getFaecher, getModule, getMeldungen, getMeldungenFiltered } from '@/app/lib/database';
 import Link from 'next/link';
 
-export default async function Dashboard() {
+export default async function Dashboard({ searchParams }) {
   // Vorgegebene Arrays für die verschiedenen Filter-Dropdowns
   const statusArray = ["Offen", "In Bearbeitung", "Erledigt", "Abgelehnt"];
-  const typArray = ["Fehler", "Ergänzung", "Sonstiges"];
+  const typArray = ["Ergänzung", "Fehler", "Verbesserungsvorschlag"];
   const faecherArray = await getFaecher();
-  const moduleArray = await getModule();
-  const meldungen = await getMeldungenFiltered(
-    {
-      status: '',
-      typ: '',
-      fach: '',
-      modul: ''
-    }
-  );
+  
+  const params = await searchParams;
+  
+  // Hole die Module basierend auf dem ausgewählten Fach
+  const moduleArray = params.fach 
+    ? await getModuleByFach(params.fach)
+    : await getModule();
+
+  // Hole die Filter aus den URL-Parametern
+  const filter = {
+    status: params.status || '',
+    typ: params.typ || '',
+    fach: params.fach || '',
+    modul: params.modul || ''
+  };
+  
+
+  const meldungen = await getMeldungenFiltered(filter);
 
   return (
     <div>
-      {/* Container mit responsivem Padding */}
       <div className="p-2 md:p-4">
-        {/* Filter-Bereich */}
-        <div className="mb-4 bg-light-grey rounded-lg p-4">
-          <div className="flex flex-col md:flex-row md:items-center gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
-              <FilterDropdown
-                heading="Status"
-                filterArray={statusArray}
-              />
-              <FilterDropdown
-                heading="Typ"
-                filterArray={typArray}
-              />
-              <FilterDropdown
-                heading="Fach"
-                filterArray={faecherArray}
-              />
-              <FilterDropdown
-                heading="Modul"
-                filterArray={moduleArray}
-              />
-            </div>
-            <div className="md:ml-auto">
-              <NeueMeldungButton />
-            </div>
-          </div>
-        </div>
-
+        <FilterSection 
+          statusArray={statusArray}
+          typArray={typArray}
+          faecherArray={faecherArray}
+          moduleArray={moduleArray}
+        />
+        
         {/* Meldungsliste */}
         <div className="space-y-4">
           {meldungen.map((meldung) => (

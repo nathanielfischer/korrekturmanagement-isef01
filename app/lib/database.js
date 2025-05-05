@@ -235,6 +235,9 @@ export async function getMeldungById(id) {
  */
 export async function getMeldungenFiltered(filter) {
     noStore();
+
+    console.log("-------" + JSON.stringify(filter));
+    
     try {
         // Basis-Query erstellen
         let query = `
@@ -280,6 +283,7 @@ export async function getMeldungenFiltered(filter) {
 
         // Sortierung hinzufügen
         query += ` ORDER BY meldungen.meldung_id DESC`;
+console.log(values);
 
         // Query ausführen
         const data = await sql.query(query, values);
