@@ -24,7 +24,7 @@ export default async function MeldungPage({ params }) {
     return (
         <Fragment>
             <div className="rounded-lg p-3 md:p-0">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-4">
                     <div>
                         <h1 className="text-2xl font-semibold mb-2">
                             #{meldung.meldung_id} - {meldung.titel}
@@ -44,7 +44,7 @@ export default async function MeldungPage({ params }) {
 
                 <hr className="border-gray-200 mb-4 w-full" />
 
-                <div className="grid grid-cols-1 gap-6 mb-6">
+                <div className="grid grid-cols-1 gap-6 mb-4">
                     <div>
                         <dl className="grid grid-cols-[120px_1fr] gap-2">
                             <dt className="text-gray-600">Fach:</dt>
@@ -62,8 +62,7 @@ export default async function MeldungPage({ params }) {
                 </div>
 
                 <div>
-                    <hr className="border-gray-200 mb-4" />
-                    <h2 className="text-lg font-medium mb-2">Beschreibung</h2>
+                    <hr className="border-gray-200 mb-5" />
                     <div className="bg-white rounded p-4 whitespace-pre-wrap">
                         {meldung.beschreibung}
                     </div>
