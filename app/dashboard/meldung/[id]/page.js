@@ -44,9 +44,8 @@ export default async function MeldungPage({ params }) {
 
                 <hr className="border-gray-200 mb-4 w-full" />
 
-                <div className="grid grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 gap-6 mb-6">
                     <div>
-                        <h2 className="text-lg font-medium mb-2">Details</h2>
                         <dl className="grid grid-cols-[120px_1fr] gap-2">
                             <dt className="text-gray-600">Fach:</dt>
                             <dd>{meldung.fach}</dd>
@@ -57,7 +56,7 @@ export default async function MeldungPage({ params }) {
                             <dt className="text-gray-600">Typ:</dt>
                             <dd>{meldung.typ}</dd>
                             <dt className="text-gray-600">Verantwortlich:</dt>
-                            <dd>{meldung.verantwortlicher_name}</dd>
+                            <dd className="whitespace-nowrap">{meldung.verantwortlicher_name}</dd>
                         </dl>
                     </div>
                 </div>
