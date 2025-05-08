@@ -55,9 +55,7 @@ export default function Dropdown({ items, heading }) {
                     ))}
                 </select>
                 {/* Dekoratives Icon */}
-                <div className="absolute left-3 top-0 h-full flex items-center pointer-events-none">
-                    <DocumentChartBarIcon className="h-[18px] w-[18px] text-gray-500" />
-                </div>
+                <DocumentChartBarIcon className="pointer-events-none absolute left-3 top-[calc(50%-9px)] h-[18px] w-[18px] text-gray-500" />
             </div>
         </div>
     );
