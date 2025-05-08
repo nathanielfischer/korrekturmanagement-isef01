@@ -43,8 +43,6 @@ export async function createNewUser(prevState, formData) {
         password: formData.get('password'),
     };
 
-    console.log(name);
-
     try {
         // await signIn('credentials', formData);
         const userId = await getUserIdByEmail(email);
@@ -96,8 +94,6 @@ export async function createMeldung(prevState, formData) {
 
     // Erhält den Verantwortlichen für das ausgewählte Modul
     const verantwortlicherData = await getVerantwortlichenByModul(formData.get('Modul'));
-    console.log(verantwortlicherData);
-
 
     if (!verantwortlicherData) {
         return {
