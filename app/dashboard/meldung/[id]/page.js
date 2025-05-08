@@ -23,7 +23,7 @@ export default async function MeldungPage({ params }) {
 
     return (
         <Fragment>
-            <div className="rounded-lg p-6">
+            <div className="rounded-lg p-3 md:p-0">
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h1 className="text-2xl font-semibold mb-2">

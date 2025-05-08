@@ -29,7 +29,7 @@ export default async function Dashboard({ searchParams }) {
 
   return (
     <div>
-      <div className="p-2 md:p-4">
+      <div className="p-2 md:p-0">
         <FilterSection 
           statusArray={statusArray}
           typArray={typArray}

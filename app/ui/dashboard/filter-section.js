@@ -25,7 +25,7 @@ export default function FilterSection({ statusArray, typArray, faecherArray, mod
   };
 
   return (
-    <div className="mb-6 mt-2 bg-light-grey rounded-lg">
+    <div className="mb-6 mt-2 md:mt-0 bg-light-grey rounded-lg">
       {/* Header mit Toggle Button für Mobile und NeueMeldungButton */}
       <div className="flex justify-between items-center mb-2">
         <div className="md:hidden w-full">
