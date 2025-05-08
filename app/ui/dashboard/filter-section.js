@@ -5,21 +5,45 @@ import FilterDropdown from './filter-dropdown';
 import NeueMeldungButton from './neue-meldung-button';
 import { useState } from 'react';
 
+/**
+ * FilterSection Komponente
+ * 
+ * Diese Komponente stellt den Filterbereich im Dashboard dar. Sie ermöglicht es dem Benutzer,
+ * Meldungen nach Status, Typ, Fach und Modul zu filtern. Die Filterauswahl wird in der URL
+ * als Suchparameter gespeichert, wodurch die Filter auch nach einem Seitenneuladen
+ * bestehen bleiben.
+ * 
+ * @param {Object} props - Die Props für die Komponente
+ * @param {Array} props.statusArray - Array mit möglichen Statuswerten
+ * @param {Array} props.typArray - Array mit möglichen Typen von Meldungen
+ * @param {Array} props.faecherArray - Array mit verfügbaren Fächern
+ * @param {Array} props.moduleArray - Array mit verfügbaren Modulen
+ * @returns {JSX.Element} Die gerenderte FilterSection Komponente
+ */
 export default function FilterSection({ statusArray, typArray, faecherArray, moduleArray }) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const router = useRouter();                    // Next.js Router für Navigation
+  const searchParams = useSearchParams();        // Zugriff auf die aktuellen URL-Parameter
+  const [isFilterOpen, setIsFilterOpen] = useState(false); // State für mobile Filter-Anzeige
 
+  /**
+   * Aktualisiert die URL-Parameter basierend auf den gewählten Filteroptionen
+   * 
+   * @param {string} filterType - Art des Filters (status, typ, fach oder modul)
+   * @param {string} value - Der ausgewählte Filterwert
+   */
   const handleFilterChange = (filterType, value) => {
     const params = new URLSearchParams(searchParams);
     if (value) {
-      params.set(filterType.toLowerCase(), value);
+      params.set(filterType.toLowerCase(), value); // Setze den entsprechenden Parameter
     } else {
-      params.delete(filterType.toLowerCase());
+      params.delete(filterType.toLowerCase());     // Lösche den Parameter, wenn kein Wert gewählt
     }
-    router.push(`/dashboard?${params.toString()}`);
+    router.push(`/dashboard?${params.toString()}`); // Navigiere zur URL mit aktualisierten Parametern
   };
 
+  /**
+   * Schaltet die Sichtbarkeit des Filterbereichs auf mobilen Geräten um
+   */
   const toggleFilters = () => {
     setIsFilterOpen(!isFilterOpen);
   };

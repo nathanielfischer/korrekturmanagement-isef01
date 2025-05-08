@@ -68,7 +68,7 @@ export default async function MeldungPage({ params }) {
                     </div>
                 </div>
                 
-                <div className="flex justify-end mt-5 gap-4">
+                <div className="flex justify-end mt-6 gap-4">
                     <Link href="/dashboard">
                         <Button>Zurück</Button>
                     </Link>

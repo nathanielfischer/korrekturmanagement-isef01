@@ -3,11 +3,25 @@ import FilterSection from '@/app/ui/dashboard/filter-section';
 import StatusBadge from '@/app/ui/status-badge';
 import Link from 'next/link';
 
+/**
+ * Dashboard Komponente
+ * 
+ * Diese Seite dient als Hauptansicht des Korrekturmanagement-Systems. Sie zeigt eine filterbare
+ * Liste aller Meldungen an und ermöglicht die Navigation zu den Detailseiten der einzelnen Meldungen.
+ * 
+ * Die Filterung erfolgt über URL-Parameter (status, typ, fach, modul) und wird durch die FilterSection
+ * Komponente gesteuert. Die gefilterten Ergebnisse werden aus der Datenbank abgerufen und als
+ * interaktive Liste dargestellt.
+ *
+ * @param {Object} props - Die Props der Komponente
+ * @param {Object} props.searchParams - Die URL-Suchparameter für die Filterung
+ * @returns {JSX.Element} Die gerenderte Dashboard-Seite
+ */
 export default async function Dashboard({ searchParams }) {
   // Vorgegebene Arrays für die verschiedenen Filter-Dropdowns
   const statusArray = ["Offen", "In Bearbeitung", "Erledigt", "Abgelehnt"];
-  const typArray = ["Ergänzung", "Fehler", "Verbesserungsvorschlag"];
-  const faecherArray = await getFaecher();
+    const typArray = ["Ergänzung", "Fehler", "Verbesserungsvorschlag"];
+    const faecherArray = await getFaecher();
   
   const params = await searchParams;
   
@@ -16,7 +30,15 @@ export default async function Dashboard({ searchParams }) {
     ? await getModuleByFach(params.fach)
     : await getModule();
 
-  // Hole die Filter aus den URL-Parametern
+  /**
+   * Filterobjekt basierend auf den URL-Parametern
+   * Leere Strings werden verwendet, wenn kein entsprechender Parameter vorhanden ist
+   * @type {Object}
+   * @property {string} status - Der Status-Filter
+   * @property {string} typ - Der Typ-Filter
+   * @property {string} fach - Der Fach-Filter
+   * @property {string} modul - Der Modul-Filter
+   */
   const filter = {
     status: params.status || '',
     typ: params.typ || '',
