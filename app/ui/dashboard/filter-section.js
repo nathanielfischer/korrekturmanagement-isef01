@@ -3,10 +3,12 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import FilterDropdown from './filter-dropdown';
 import NeueMeldungButton from './neue-meldung-button';
+import { useState } from 'react';
 
 export default function FilterSection({ statusArray, typArray, faecherArray, moduleArray }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const handleFilterChange = (filterType, value) => {
     const params = new URLSearchParams(searchParams);
@@ -18,9 +20,35 @@ export default function FilterSection({ statusArray, typArray, faecherArray, mod
     router.push(`/dashboard?${params.toString()}`);
   };
 
+  const toggleFilters = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
   return (
-    <div className="mb-4 bg-light-grey rounded-lg p-4">
-      <div className="flex flex-col md:flex-row md:items-center gap-4">
+    <div className="mb-6 mt-2 bg-light-grey rounded-lg">
+      {/* Header mit Toggle Button für Mobile und NeueMeldungButton */}
+      <div className="flex justify-between items-center mb-2">
+        <div className="md:hidden w-full">
+          <button 
+            onClick={toggleFilters}
+            className="flex items-center justify-between w-full bg-white px-4 py-2 rounded-lg"
+          >
+            <span>Filter</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 transition-transform ${isFilterOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
+        <div className="hidden md:block md:flex-grow">
+          {/* Platzhalter für Desktop */}
+        </div>
+        <div className="md:ml-auto">
+          <NeueMeldungButton />
+        </div>
+      </div>
+
+      {/* Filteroptionen - auf Mobile nur sichtbar, wenn geöffnet */}
+      <div className={`${isFilterOpen ? 'block' : 'hidden'} md:block`}>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
           <FilterDropdown
             heading="Status"
@@ -46,9 +74,6 @@ export default function FilterSection({ statusArray, typArray, faecherArray, mod
             currentValue={searchParams.get('modul') || ''}
             onFilterChange={handleFilterChange}
           />
-        </div>
-        <div className="md:ml-auto">
-          <NeueMeldungButton />
         </div>
       </div>
     </div>
