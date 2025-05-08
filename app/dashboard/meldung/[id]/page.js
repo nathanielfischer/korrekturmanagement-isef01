@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import StatusBadge from '@/app/ui/status-badge';
 import StatusDropdown from '@/app/ui/meldung/status-dropdown';
 import { Fragment } from 'react';
+import { Button } from '@/app/ui/button';
+import Link from 'next/link';
 
 /**
  * @description Zeigt die detaillierte Ansicht einer einzelnen Meldung an
@@ -21,7 +23,7 @@ export default async function MeldungPage({ params }) {
 
     return (
         <Fragment>
-            <div className="rounded-lg bg-gray-50 p-6">
+            <div className="rounded-lg p-6">
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h1 className="text-2xl font-semibold mb-2">
@@ -39,6 +41,8 @@ export default async function MeldungPage({ params }) {
                         <StatusBadge status={meldung.status} />
                     </div>
                 </div>
+
+                <hr className="border-gray-200 mb-4 w-full" />
 
                 <div className="grid grid-cols-2 gap-6 mb-6">
                     <div>
@@ -59,14 +63,19 @@ export default async function MeldungPage({ params }) {
                 </div>
 
                 <div>
+                    <hr className="border-gray-200 mb-4" />
                     <h2 className="text-lg font-medium mb-2">Beschreibung</h2>
                     <div className="bg-white rounded p-4 whitespace-pre-wrap">
                         {meldung.beschreibung}
                     </div>
                 </div>
-            </div>
-            <div className="flex justify-end mt-5 mr-5">
-                <StatusDropdown currentStatus={meldung.status} meldungId={meldung.meldung_id} />
+                
+                <div className="flex justify-end mt-5 gap-4">
+                    <Link href="/dashboard">
+                        <Button>Zurück</Button>
+                    </Link>
+                    <StatusDropdown currentStatus={meldung.status} meldungId={meldung.meldung_id} />
+                </div>
             </div>
         </Fragment>
     );

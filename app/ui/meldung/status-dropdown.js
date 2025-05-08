@@ -2,15 +2,17 @@
 
 import { useFormStatus } from 'react-dom';
 import { changeStatus } from '@/app/lib/actions';
+import { Button } from '@/app/ui/button';
 
 /**
  * StatusDropdown Komponente
  * Ermöglicht das Ändern des Status einer Meldung über ein Dropdown-Menü
+ * das als Button dargestellt wird
  * 
  * @param {string} currentStatus - Der aktuelle Status der Meldung
  * @param {string} meldungId - Die ID der Meldung, deren Status geändert werden soll
  * @param {string} className - Zusätzliche CSS-Klassen für das select-Element
- * @returns {JSX.Element} Ein Dropdown-Menü zur Statusänderung
+ * @returns {JSX.Element} Ein Dropdown-Menü zur Statusänderung als Button
  */
 export default function StatusDropdown({ currentStatus, meldungId, className }) {
     // Hook für den Ladezustand des Formulars
@@ -30,23 +32,28 @@ export default function StatusDropdown({ currentStatus, meldungId, className }) 
             const status = formData.get('status');
             await changeStatus(meldungId, status);
         }}>
-            <select 
-                name="status"
-                defaultValue="" // Setzt "Status aktualisieren" als Standardauswahl
-                onChange={(e) => e.target.form.requestSubmit()} // Automatisches Absenden bei Änderung
-                className={`rounded-md border border-gray-200 py-2 px-3 text-sm ${className || ''}`}
-                disabled={pending}
-            >
-                {statusOptions.map((option) => (
-                    <option 
-                        key={option.value} 
-                        value={option.value}
-                        disabled={option.disabled}
-                    >
-                        {option.label}
-                    </option>
-                ))}
-            </select>
+            <div className="relative inline-block">
+                <select 
+                    name="status"
+                    defaultValue="" 
+                    onChange={(e) => e.target.form.requestSubmit()}
+                    className={`absolute w-full h-full opacity-0 cursor-pointer z-10 ${pending ? 'pointer-events-none' : ''}`}
+                    disabled={pending}
+                >
+                    {statusOptions.map((option) => (
+                        <option 
+                            key={option.value} 
+                            value={option.value}
+                            disabled={option.disabled}
+                        >
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
+                <Button disabled={pending} className={className}>
+                    {pending ? 'Wird aktualisiert...' : 'Status aktualisieren'}
+                </Button>
+            </div>
         </form>
     );
 }
