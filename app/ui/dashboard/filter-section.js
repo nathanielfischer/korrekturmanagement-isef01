@@ -42,13 +42,13 @@ export default function FilterSection({ statusArray, typArray, faecherArray, mod
         <div className="hidden md:block md:flex-grow">
           {/* Platzhalter für Desktop */}
         </div>
-        <div className="md:ml-auto">
+        <div className="md:ml-auto ml-4">
           <NeueMeldungButton />
         </div>
       </div>
 
       {/* Filteroptionen - auf Mobile nur sichtbar, wenn geöffnet */}
-      <div className={`${isFilterOpen ? 'block' : 'hidden'} md:block`}>
+      <div className={`${isFilterOpen ? 'block' : 'hidden'} md:block mt-4`}>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full">
           <FilterDropdown
             heading="Status"

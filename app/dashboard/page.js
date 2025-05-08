@@ -48,8 +48,13 @@ export default async function Dashboard({ searchParams }) {
               <div className="p-4">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
                   <div className="flex-1">
-                    <div className="text-base font-medium">
-                      #{meldung.meldung_id} - {meldung.titel}
+                    <div className="mb-2 text-base font-medium flex items-center space-between md:block">
+                      <div className="flex-1 break-words pr-2">
+                        #{meldung.meldung_id} - {meldung.titel}
+                      </div>
+                      <span className="inline-flex md:hidden whitespace-nowrap">
+                        <StatusBadge status={meldung.status} />
+                      </span>
                     </div>
                     <div className="text-gray-500 text-sm mt-1">
                       {new Date(meldung.datum).toLocaleDateString('de-DE', {
@@ -65,7 +70,7 @@ export default async function Dashboard({ searchParams }) {
                       {meldung.verantwortlicher_name}
                     </div>
                   </div>
-                  <div className="md:ml-4">
+                  <div className="md:ml-4 hidden md:block">
                     <StatusBadge status={meldung.status} />
                   </div>
                 </div>

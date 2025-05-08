@@ -16,7 +16,7 @@ export default function StatusBadge({ status }) {
 
     return (
         <span
-            className={`px-4 py-3 rounded-full text-sm font-medium ${getStatusStyles(
+            className={`px-3 py-1 md:px-4 md:py-3 rounded-full text-sm font-medium ${getStatusStyles(
                 status
             )}`}
         >
