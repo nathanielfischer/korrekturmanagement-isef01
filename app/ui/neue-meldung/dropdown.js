@@ -31,7 +31,7 @@ export default function Dropdown({ items, heading }) {
                 <select
                     id={heading}
                     name={heading}
-                    className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 indent-10 text-sm outline-2 placeholder:text-gray-500"
+                    className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 indent-10 text-sm outline-2 placeholder:text-gray-500 appearance-none"
                     aria-describedby="customer-error"
                     defaultValue={'DEFAULT'}
                     required
