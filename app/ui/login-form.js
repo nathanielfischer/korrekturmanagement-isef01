@@ -1,3 +1,8 @@
+/**
+ * Login-Formular mit E-Mail/Passwort-Eingabe und Fehlerbehandlung
+ * Verwendet Server Actions für Authentifizierung
+ */
+
 'use client';
 
 import { authenticate } from '@/app/lib/actions';
@@ -12,17 +17,24 @@ import { useFormStatus } from 'react-dom';
 import { useActionState } from 'react';
 import Link from 'next/link';
 
+/**
+ * Hauptkomponente des Login-Formulars
+ * @returns {JSX.Element} Formular mit E-Mail, Passwort und Anmelde-Button
+ */
 export default function LoginForm() {
+    // State für Fehlerbehandlung und Formular-Status
     const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined);
 
     return (
         <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
             <form action={formAction} className="space-y-3">
                 <div className="">
+                    {/* Formular-Überschrift */}
                     <h1 className={`mb-3 text-2xl`}>
                         Melde dich an
                     </h1>
                     <div className="w-full">
+                        {/* E-Mail Eingabefeld */}
                         <div>
                             <label
                                 className="mb-3 mt-5 block text-xs font-medium text-gray-900"
@@ -42,6 +54,7 @@ export default function LoginForm() {
                                 <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
                             </div>
                         </div>
+                        {/* Passwort Eingabefeld */}
                         <div className="mt-4">
                             <label
                                 className="mb-3 mt-5 block text-xs font-medium text-gray-900"
@@ -64,6 +77,7 @@ export default function LoginForm() {
                         </div>
                     </div>
                     <LoginButton />
+                    {/* Fehlerbereich */}
                     <div
                         className="flex h-8 items-end space-x-1"
                         aria-live="polite"
@@ -79,6 +93,7 @@ export default function LoginForm() {
                 </div>
             </form>
 
+            {/* Link zur Registrierung */}
             <Link href="/auth/sign-up">
                 <p className='mb-3 text-xs font-medium text-gray-900 text-center '>Neuen Account erstellen</p>
             </Link>
@@ -86,6 +101,10 @@ export default function LoginForm() {
     );
 }
 
+/**
+ * Anmelde-Button mit Ladezustand
+ * @returns {JSX.Element} Button mit Pfeil-Icon und Pending-Status
+ */
 function LoginButton() {
     const { pending } = useFormStatus();
 
