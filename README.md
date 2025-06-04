@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IU Korrekturmanagement System
 
-## Getting Started
+Ein modernes Next.js-basiertes Korrekturmanagement-System für die Verwaltung von Fehlermeldungen und Verbesserungsvorschlägen in Lernmaterialien.
 
-First, run the development server:
+## Inhaltsverzeichnis
 
+- [Überblick](#überblick)
+  - [Features](#features)
+  - [Screenshots](#screenshots)
+  - [Demo](#demo)
+- [Technologie-Stack](#technologie-stack)
+- [Installation](#installation)
+- [Verwendung](#verwendung)
+- [Projektstruktur](#projektstruktur)
+
+## Überblick
+
+Das IU Korrekturmanagement System ist ein Prototyp für die Verwaltung von Korrekturen, Ergänzungen und Verbesserungsvorschlägen in Lernmaterialien. Es ermöglicht Benutzern das Melden von Fehlern, das Verfolgen des Bearbeitungsstatus und die effiziente Verwaltung durch die Zuweisung einer verantwortlichen Person.
+
+### Features
+
+Benutzer können:
+
+- ✅ Sich registrieren und anmelden (NextAuth.js)
+- ✅ Neue Fehlermeldungen erstellen mit detaillierten Kategorien
+- ✅ Meldungen nach Status, Typ, Fach und Modul filtern
+- ✅ Den Bearbeitungsstatus von Meldungen verfolgen
+- ✅ Detailansichten einzelner Meldungen einsehen
+- ✅ Den Status von Meldungen aktualisieren
+
+### Screenshots
+
+*Screenshots können hier hinzugefügt werden*
+
+### Demo
+
+Dies ist ein Studentenprojekt und ein inoffizieller Prototyp - keine offizielle IU-Anwendung.
+
+## Technologie-Stack
+
+- **Frontend Framework:** Next.js 15 mit App Router
+- **Styling:** Tailwind CSS 4
+- **Authentifizierung:** NextAuth.js 5.0
+- **Datenbank:** Vercel Postgres
+- **Icons:** Heroicons
+- **Deployment:** Vercel
+
+## Installation
+
+1. Repository klonen:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd korrekturmanagement-isef01
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Abhängigkeiten installieren:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Umgebungsvariablen einrichten:
+```bash
+cp .env.example .env
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Fügen Sie Ihre Datenbank-Verbindungsdetails und NextAuth-Konfiguration in die `.env` Datei ein.
 
-## Learn More
+4. Entwicklungsserver starten:
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Die Anwendung ist unter [https://korrekturmanagement-isef01.vercel.app/](https://korrekturmanagement-isef01.vercel.app/) verfügbar.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Verwendung
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Entwicklung
 
-## Deploy on Vercel
+```bash
+# Entwicklungsserver mit Turbopack starten
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Production Build erstellen
+npm run build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Production Server starten
+npm start
+
+# Code Linting
+npm run lint
+```
+
+### Authentifizierung
+
+Das System verwendet NextAuth.js für die Benutzerauthentifizierung mit einem Credentials Provider. Benutzer können sich registrieren und anmelden.
+
+### Meldungen erstellen
+
+1. Nach der Anmeldung auf "Neue Meldung" klicken
+2. Titel und Beschreibung eingeben
+3. Fach, Modul, Quelle und Typ auswählen
+4. Meldung speichern
+
+### Filterung und Verwaltung
+
+Das Dashboard bietet umfangreiche Filteroptionen:
+- **Status:** Offen, In Bearbeitung, Erledigt, Abgelehnt
+- **Typ:** Ergänzung, Fehler, Verbesserungsvorschlag
+- **Fach:** Dynamisch aus der Datenbank geladen
+- **Modul:** Abhängig vom gewählten Fach
+
+## Projektstruktur
+
+```
+├── app/
+│   ├── auth/                 # Authentifizierungsseiten
+│   ├── dashboard/            # Hauptanwendung
+│   │   ├── meldung/[id]/    # Detailansicht einzelner Meldungen
+│   │   └── neue-meldung/    # Formular für neue Meldungen
+│   ├── lib/                 # Utility-Funktionen und Server Actions
+│   │   ├── actions.js       # Server Actions
+│   │   ├── database.js      # Datenbankabfragen
+│   │   └── helper.js        # Helper-Funktionen
+│   └── ui/                  # Wiederverwendbare UI-Komponenten
+├── public/                  # Statische Assets
+├── auth.config.js          # NextAuth Konfiguration
+├── auth.js                 # NextAuth Setup
+├── middleware.js           # Route Protection
+└── next.config.js          # Next.js Konfiguration
+```
+
+### Wichtige Komponenten
+
+- **[`Dashboard`](app/dashboard/page.js)** - Hauptübersicht mit Filterung
+- **[`FilterSection`](app/ui/dashboard/filter-section.js)** - Filterkomponenten
+- **[`Dropdown`](app/ui/neue-meldung/dropdown.js)** - Wiederverwendbare Dropdown-Komponente
+- **[`StatusBadge`](app/ui/status-badge.js)** - Statusanzeige
+- **[`database.js`](app/lib/database.js)** - Alle Datenbankinteraktionen
+- **[`actions.js`](app/lib/actions.js)** - Server Actions für Formulare
+
+---
+
+**Hinweis:** Dies ist ein Studenten-Prototyp und keine offizielle IU-Anwendung.
