@@ -5,9 +5,6 @@ Ein Protyp eines modernen Next.js-basierten Korrekturmanagement-Systems für die
 ## Inhaltsverzeichnis
 
 - [Überblick](#überblick)
-  - [Features](#features)
-  - [Screenshots](#screenshots)
-  - [Demo](#demo)
 - [Technologie-Stack](#technologie-stack)
 - [Verwendung](#verwendung)
 - [Projektstruktur](#projektstruktur)
@@ -26,10 +23,6 @@ Benutzer können:
 - ✅ Den Bearbeitungsstatus von Meldungen verfolgen
 - ✅ Detailansichten einzelner Meldungen einsehen
 - ✅ Den Status von Meldungen aktualisieren
-
-### Screenshots
-
-*Screenshots können hier hinzugefügt werden*
 
 ### Demo
 
@@ -59,7 +52,7 @@ Das System verwendet NextAuth.js für die Benutzerauthentifizierung mit einem Cr
 3. Fach, Modul, Quelle und Typ auswählen
 4. Meldung speichern
 
-### Filterung und Verwaltung
+### Übersicht & Filtermöglichkeiten
 
 Das Dashboard bietet umfangreiche Filteroptionen:
 - **Status:** Offen, In Bearbeitung, Erledigt, Abgelehnt
@@ -67,12 +60,16 @@ Das Dashboard bietet umfangreiche Filteroptionen:
 - **Fach:** Dynamisch aus der Datenbank geladen
 - **Modul:** Abhängig vom gewählten Fach
 
+### Status ändern
+
+Auf eine Meldung klicken und auf der Detailseite den Status entsprechend ändern.
+
 ## Projektstruktur
 
 ```
 ├── app/
-│   ├── auth/                 # Authentifizierungsseiten
-│   ├── dashboard/            # Hauptanwendung
+│   ├── auth/                # Authentifizierungsseiten
+│   ├── dashboard/           # Hauptanwendung
 │   │   ├── meldung/[id]/    # Detailansicht einzelner Meldungen
 │   │   └── neue-meldung/    # Formular für neue Meldungen
 │   ├── lib/                 # Utility-Funktionen und Server Actions
@@ -81,20 +78,11 @@ Das Dashboard bietet umfangreiche Filteroptionen:
 │   │   └── helper.js        # Helper-Funktionen
 │   └── ui/                  # Wiederverwendbare UI-Komponenten
 ├── public/                  # Statische Assets
-├── auth.config.js          # NextAuth Konfiguration
-├── auth.js                 # NextAuth Setup
-├── middleware.js           # Route Protection
-└── next.config.js          # Next.js Konfiguration
+├── auth.config.js           # NextAuth Konfiguration
+├── auth.js                  # NextAuth Setup
+├── middleware.js            # Route Protection
+└── next.config.js           # Next.js Konfiguration
 ```
-
-### Wichtige Komponenten
-
-- **[`Dashboard`](app/dashboard/page.js)** - Hauptübersicht mit Filterung
-- **[`FilterSection`](app/ui/dashboard/filter-section.js)** - Filterkomponenten
-- **[`Dropdown`](app/ui/neue-meldung/dropdown.js)** - Wiederverwendbare Dropdown-Komponente
-- **[`StatusBadge`](app/ui/status-badge.js)** - Statusanzeige
-- **[`database.js`](app/lib/database.js)** - Alle Datenbankinteraktionen
-- **[`actions.js`](app/lib/actions.js)** - Server Actions für Formulare
 
 ---
 
