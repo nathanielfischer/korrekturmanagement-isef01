@@ -1,6 +1,6 @@
 # IU Korrekturmanagement System
 
-Ein modernes Next.js-basiertes Korrekturmanagement-System für die Verwaltung von Fehlermeldungen und Verbesserungsvorschlägen in Lernmaterialien.
+Ein Protyp eines modernen Next.js-basierten Korrekturmanagement-Systems für die Verwaltung von Fehlermeldungen und Verbesserungsvorschlägen in Lernmaterialien.
 
 ## Inhaltsverzeichnis
 
@@ -9,7 +9,6 @@ Ein modernes Next.js-basiertes Korrekturmanagement-System für die Verwaltung vo
   - [Screenshots](#screenshots)
   - [Demo](#demo)
 - [Technologie-Stack](#technologie-stack)
-- [Installation](#installation)
 - [Verwendung](#verwendung)
 - [Projektstruktur](#projektstruktur)
 
@@ -21,7 +20,7 @@ Das IU Korrekturmanagement System ist ein Prototyp für die Verwaltung von Korre
 
 Benutzer können:
 
-- ✅ Sich registrieren und anmelden (NextAuth.js)
+- ✅ Sich registrieren und anmelden
 - ✅ Neue Fehlermeldungen erstellen mit detaillierten Kategorien
 - ✅ Meldungen nach Status, Typ, Fach und Modul filtern
 - ✅ Den Bearbeitungsstatus von Meldungen verfolgen
@@ -45,50 +44,9 @@ Dies ist ein Studentenprojekt und ein inoffizieller Prototyp - keine offizielle 
 - **Icons:** Heroicons
 - **Deployment:** Vercel
 
-## Installation
-
-1. Repository klonen:
-```bash
-git clone <repository-url>
-cd korrekturmanagement-isef01
-```
-
-2. Abhängigkeiten installieren:
-```bash
-npm install
-```
-
-3. Umgebungsvariablen einrichten:
-```bash
-cp .env.example .env
-```
-
-Fügen Sie Ihre Datenbank-Verbindungsdetails und NextAuth-Konfiguration in die `.env` Datei ein.
-
-4. Entwicklungsserver starten:
-```bash
-npm run dev
-```
-
-Die Anwendung ist unter [https://korrekturmanagement-isef01.vercel.app/](https://korrekturmanagement-isef01.vercel.app/) verfügbar.
-
 ## Verwendung
 
-### Entwicklung
-
-```bash
-# Entwicklungsserver mit Turbopack starten
-npm run dev
-
-# Production Build erstellen
-npm run build
-
-# Production Server starten
-npm start
-
-# Code Linting
-npm run lint
-```
+Die Anwendung ist unter [https://korrekturmanagement-isef01.vercel.app/](https://korrekturmanagement-isef01.vercel.app/) verfügbar.
 
 ### Authentifizierung
 
