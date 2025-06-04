@@ -37,7 +37,7 @@ export default async function MeldungPage({ params }) {
                             })}
                         </div>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 whitespace-nowrap">
                         <StatusBadge status={meldung.status} />
                     </div>
                 </div>
