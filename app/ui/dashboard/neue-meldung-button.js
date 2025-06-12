@@ -20,9 +20,9 @@ export default function NeueMeldungButton({ className }) {
     return (
         <Button onClick={() => redirect('/dashboard/neue-meldung')} className={className}>
             {/* Plus-Icon - immer sichtbar */}
-            <PlusCircleIcon className="ml-auto lg:mr-2 h-5 w-5 text-gray-50" /> 
+            <PlusCircleIcon className="ml-auto md:mr-2 h-5 w-5 text-gray-50" /> 
             {/* Text - nur auf großen Bildschirmen sichtbar */}
-            <span className="hidden lg:inline">Neue Meldung</span>
+            <span className="hidden md:inline">Neue Meldung</span>
         </Button>
     );
 }
