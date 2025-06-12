@@ -6,12 +6,12 @@ Ein Protyp eines modernen Next.js-basierten Korrekturmanagement-Systems für die
 
 - [Überblick](#überblick)
 - [Technologie-Stack](#technologie-stack)
-- [Verwendung](#verwendung)
+- [Anwendung](#verwendung)
 - [Projektstruktur](#projektstruktur)
 
 ## Überblick
 
-Das IU Korrekturmanagement System ist ein Prototyp für die Verwaltung von Korrekturen, Ergänzungen und Verbesserungsvorschlägen in Lernmaterialien. Es ermöglicht Benutzern das Melden von Fehlern, das Verfolgen des Bearbeitungsstatus und die effiziente Verwaltung durch die Zuweisung einer verantwortlichen Person.
+Das IU Korrekturmanagement System ist ein Prototyp für die Verwaltung von Korrekturen, Ergänzungen und Verbesserungsvorschlägen in Lernmaterialien. Es ermöglicht Benutzern das Melden von Fehlern, das Verfolgen des Bearbeitungsstatus und die effiziente Verwaltung durch die Zuweisung an eine verantwortlichen Person.
 
 ### Features
 
@@ -30,14 +30,14 @@ Dies ist ein Studentenprojekt und ein inoffizieller Prototyp - keine offizielle 
 
 ## Technologie-Stack
 
-- **Frontend Framework:** Next.js 15 mit App Router
+- **Framework:** Next.js 15 mit App Router
 - **Styling:** Tailwind CSS 4
 - **Authentifizierung:** NextAuth.js 5.0
-- **Datenbank:** Vercel Postgres
+- **Datenbank:** Neon PostgreSQL
 - **Icons:** Heroicons
 - **Deployment:** Vercel
 
-## Verwendung
+## Anwendung
 
 Die Anwendung ist unter [https://korrekturmanagement-isef01.vercel.app/](https://korrekturmanagement-isef01.vercel.app/) verfügbar.
 
@@ -58,7 +58,7 @@ Das Dashboard bietet umfangreiche Filteroptionen:
 - **Status:** Offen, In Bearbeitung, Erledigt, Abgelehnt
 - **Typ:** Ergänzung, Fehler, Verbesserungsvorschlag
 - **Fach:** Dynamisch aus der Datenbank geladen
-- **Modul:** Abhängig vom gewählten Fach
+- **Modul:** Abhängig vom gewählten Fach bzw. alle Module, falls kein Fach ausgewählt
 
 ### Status ändern
 
@@ -86,4 +86,4 @@ Auf eine Meldung klicken und auf der Detailseite den Status entsprechend ändern
 
 ---
 
-**Hinweis:** Dies ist ein Studenten-Prototyp und keine offizielle IU-Anwendung.
+**Hinweis:** Dies ist ein Studenten-Projekt und keine offizielle IU-Anwendung.
